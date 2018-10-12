@@ -114,3 +114,6 @@ dmypy.json
 .npy
 .wav
 .txt
+
+# files
+dat/*
