@@ -114,7 +114,10 @@ dmypy.json
 .npy
 .wav
 .txt
-
+.idea/*
 # files
 dat/*
+test_*/*
+output/*
+WORLD4py/*
 
