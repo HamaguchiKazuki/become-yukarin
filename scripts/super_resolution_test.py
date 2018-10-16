@@ -5,6 +5,7 @@ import re
 from functools import partial
 from pathlib import Path
 
+import os
 import librosa
 import numpy
 
@@ -12,6 +13,7 @@ from become_yukarin import SuperResolution
 from become_yukarin.config.sr_config import create_from_json as create_config
 from become_yukarin.dataset.dataset import AcousticFeatureProcess
 from become_yukarin.dataset.dataset import WaveFileLoadProcess
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('model_names', nargs='+')
@@ -29,29 +31,30 @@ gpu = args.gpu
 
 paths_test = list(Path('./test_data_sr/').glob('*.wav'))
 
-
 def extract_number(f):
     s = re.findall("\d+", str(f))
     return int(s[-1]) if s else -1
 
 
 def process(p: Path, super_resolution: SuperResolution):
+    # get npy and npz
     param = config.dataset.param
     wave_process = WaveFileLoadProcess(
         sample_rate=param.voice_param.sample_rate,
         top_db=None,
     )
+
     acoustic_feature_process = AcousticFeatureProcess(
         frame_period=param.acoustic_feature_param.frame_period,
         order=param.acoustic_feature_param.order,
         alpha=param.acoustic_feature_param.alpha,
         f0_estimating_method=param.acoustic_feature_param.f0_estimating_method,
     )
-
     try:
         if p.suffix in ['.npy', '.npz']:
             p = glob.glob(str(input_wave_directory / p.stem) + '.*')[0]
             p = Path(p)
+        print(p)
         input = acoustic_feature_process(wave_process(str(p)))
         wave = super_resolution(input.spectrogram, acoustic_feature=input, sampling_rate=param.voice_param.sample_rate)
         librosa.output.write_wav(str(output / p.stem) + '.wav', wave.wave, wave.sampling_rate, norm=True)
@@ -82,10 +85,10 @@ for model_name in args.model_names:
     output = Path('./output').absolute() / base_model.name
     output.mkdir(exist_ok=True)
 
-    #paths = [path_train, path_test] + paths_test
     paths = paths_test
 
     process_partial = partial(process, super_resolution=super_resolution)
+
     if gpu is None:
         pool = multiprocessing.Pool()
         pool.map(process_partial, paths)

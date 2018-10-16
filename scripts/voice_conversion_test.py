@@ -60,17 +60,21 @@ for model_name in args.model_names:
     else:
         model_paths = base_model.glob('predictor_*.npz')
         model_path = list(sorted(model_paths, key=extract_number))[-1]
-    print(model_path)
+
+    # print(model_path)
     acoustic_converter = AcousticConverter(config, model_path, gpu=gpu)
 
     output = Path('./output').absolute() / base_model.name
     output.mkdir(exist_ok=True)
 
-    paths = [path_train, path_test] + paths_test
+    #paths = [path_train, path_test] + paths_test
+    paths = paths_test
 
     process_partial = partial(process, acoustic_converter=acoustic_converter)
+
     if gpu is None:
         pool = multiprocessing.Pool()
+        # process func が動く
         pool.map(process_partial, paths)
     else:
         list(map(process_partial, paths))

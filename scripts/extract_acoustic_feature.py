@@ -80,6 +80,7 @@ def generate_feature(path1, path2):
         f0_floor=arguments.f0_floor1,
         f0_ceil=arguments.f0_ceil1,
     )
+
     acoustic_feature_process2 = AcousticFeatureProcess(
         frame_period=arguments.frame_period,
         order=arguments.order,
