@@ -116,7 +116,15 @@ dmypy.json
 .txt
 .idea/*
 # files
-dat/*
+dat/in_1st_yukari_wav/*
+dat/in_1st_my_wav/*
+dat/in_2nd_yukari_many_wav/*
+dat/model/yukari_1st/*
+dat/model/yukari_2nd/*
+dat/out_1st_my_npy/*
+dat/out_1st_yukari_npy/*
+dat/out_2nd_yukari_many_npy/*
+dat/wav_text/*
 test_*/*
 output/*
 WORLD4py/*
