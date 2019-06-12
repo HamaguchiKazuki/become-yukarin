@@ -1,3 +1,14 @@
+## 変換結果
+https://drive.google.com/drive/folders/1JWQLs9DU9Gt5RD-6x56L-6lP99l25zC1
+
+## 使用したデータ
+- 一段階目
+https://drive.google.com/open?id=1B8T84H2Bv5VvBk0i52tcExckNnCt6Szz
+-二段階目
+https://drive.google.com/open?id=1mnI9V7DXUH0-DZznioHQ4gjx2BHND_rH
+
+
+## fork元の内容
 本レポジトリは「ディープラーニングの力で結月ゆかりの声になる」として公開されている https://github.com/Hiroshiba/become-yukarin の解説をするために作成したレポジトリです。
 https://github.com/Hiroshiba/become-yukarin のオリジナル Readme.txt は readme_original.md を参照願います。
 
@@ -8,6 +19,8 @@ https://github.com/Hiroshiba/become-yukarin のオリジナル Readme.txt は re
 
 ＊解説記事のURL
 https://qiita.com/atticatticattic/items/f1e4c671d73d815bbad2
+
+
 
 
 Copyright (c) 2018 Yoshikazu Ohta
